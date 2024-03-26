@@ -43,9 +43,7 @@ class RegisteredUserController extends Controller
                     'max' => 'Name cannot be longer than 20 letters',
                     'regex' => 'Name must start with letters. Numbers and underscores are allowed.',
                 ],
-                'password' => [
-                    'confirmed' => 'Passwords do not match',
-                ]
+                'password.confirmed' => 'Passwords do not match'
             ],
         );
 
