@@ -28,7 +28,6 @@ export default function Guest({ children }: PropsWithChildren) {
 function GuestNavBar() {
 
     // style definitions
-    const default_styles: string = "font-semibold px-3 py-2 focus-outline-none rounded-lg hover:shadow-lg transition-all duration-300 ease-in-out";
     const selected_styles: string = "text-white bg-black hover:bg-gray-700"
     const unselected_styles: string = "text-gray-600 hover:text-white hover:bg-black"
 
@@ -50,14 +49,14 @@ function GuestNavBar() {
                 <div className="flex gap-2">
                     <Link
                         href={route('login')}
-                        className={`${default_styles} ${getCurrentStyle('login')}`}
+                        className={`${getCurrentStyle('login')} font-semibold px-3 py-2 focus-outline-none rounded-lg hover:shadow-lg transition-all duration-300 ease-in-out`}
                     >
                         Log in
                     </Link>
 
                     <Link
                         href={route('register')}
-                        className={`${default_styles} ${getCurrentStyle('register')}`}
+                        className={`${getCurrentStyle('register')} font-semibold px-3 py-2 focus-outline-none rounded-lg hover:shadow-lg transition-all duration-300 ease-in-out`}
                     >
                         Register
                     </Link>
