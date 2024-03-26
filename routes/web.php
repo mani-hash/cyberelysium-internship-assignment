@@ -16,16 +16,6 @@ use Inertia\Inertia;
 |
 */
 
-// Temporary test route
-Route::get('/welcome', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
-
 // Redirect users to the dashboard by default
 Route::redirect('/', 'dashboard');
 
