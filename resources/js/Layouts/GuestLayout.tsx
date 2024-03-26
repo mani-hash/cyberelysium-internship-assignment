@@ -26,21 +26,44 @@ export default function Guest({ children }: PropsWithChildren) {
 }
 
 function GuestNavBar() {
-    return (
-        <div className="w-full p-6 text-end">
-            <Link
-                href={route('login')}
-                className="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-blue-500"
-            >
-                Log in
-            </Link>
 
-            <Link
-                href={route('register')}
-                className="ms-4 font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-blue-500"
-            >
-                Register
-            </Link>
-        </div>
+    // style definitions
+    const default_styles: string = "font-semibold px-3 py-2 focus-outline-none rounded-lg hover:shadow-lg transition-all duration-300 ease-in-out";
+    const selected_styles: string = "text-white bg-black hover:bg-gray-700"
+    const unselected_styles: string = "text-gray-600 hover:text-white hover:bg-black"
+
+    // get current style depending on current route
+    function getCurrentStyle(route_name: string): string {
+        if (route().current() === route_name) {
+            return selected_styles;
+        }
+
+        return unselected_styles;
+    }
+
+    return (
+        <nav className="w-full p-6">
+            <div className="max-w-7xl mx-auto flex flex-row justify-between">
+                <div>
+                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
+                </div>
+                <div className="flex gap-2">
+                    <Link
+                        href={route('login')}
+                        className={`${default_styles} ${getCurrentStyle('login')}`}
+                    >
+                        Log in
+                    </Link>
+
+                    <Link
+                        href={route('register')}
+                        className={`${default_styles} ${getCurrentStyle('register')}`}
+                    >
+                        Register
+                    </Link>
+                </div>
+
+            </div>
+        </nav>
     );
 }
