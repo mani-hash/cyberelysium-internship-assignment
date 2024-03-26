@@ -5,6 +5,7 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
+import PasswordInput from '@/Components/PasswordInput';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -68,7 +69,18 @@ export default function Register() {
                 <div className="mt-4">
                     <InputLabel htmlFor="password" value="Password" />
 
-                    <TextInput
+                    {/* <TextInput
+                        id="password"
+                        type="password"
+                        name="password"
+                        value={data.password}
+                        className="mt-1 block w-full"
+                        autoComplete="new-password"
+                        onChange={(e) => setData('password', e.target.value)}
+                        required
+                    /> */}
+
+                    <PasswordInput
                         id="password"
                         type="password"
                         name="password"
@@ -85,7 +97,7 @@ export default function Register() {
                 <div className="mt-4">
                     <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
 
-                    <TextInput
+                    {/* <TextInput
                         id="password_confirmation"
                         type="password"
                         name="password_confirmation"
@@ -94,6 +106,17 @@ export default function Register() {
                         autoComplete="new-password"
                         onChange={(e) => setData('password_confirmation', e.target.value)}
                         required
+                    /> */}
+
+                    <PasswordInput 
+                       id="password_confirmation"
+                       type="password"
+                       name="password_confirmation"
+                       value={data.password_confirmation}
+                       className="mt-1 block w-full"
+                       autoComplete="new-password"
+                       onChange={(e) => setData('password_confirmation', e.target.value)}
+                       required 
                     />
 
                     <InputError message={errors.password_confirmation} className="mt-2" />
