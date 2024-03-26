@@ -19,7 +19,7 @@ export default function InputError({ message, className = '', ...props }: HTMLAt
     );
 
     return message ? (
-        <p {...props} className={'text-sm text-red-600 text-center' + className}>
+        <p {...props} className={'text-sm text-red-600 inline-block content-center' + className}>
             { error_svg } { message }
         </p>
     ) : null;
