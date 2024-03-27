@@ -1,12 +1,12 @@
-import { InputHTMLAttributes, MouseEventHandler, useState } from "react";
+import { ForwardedRef, InputHTMLAttributes, MouseEventHandler, RefObject, useState } from "react";
 import TextInput from "./TextInput";
 
 // define type named Password
 type Password = "password" | "text";
 
 export default function PasswordInput(
-    {type = 'password', className = '', isFocused=false, onChange, ...props} :
-    InputHTMLAttributes<HTMLInputElement> & { type : Password, isFocused? : boolean}
+    {type = 'password', className = '', isFocused=false, onChange, ref, ...props} :
+    InputHTMLAttributes<HTMLInputElement> & { type : Password, isFocused? : boolean, ref?: RefObject<HTMLInputElement>}
 ) {
 
     const [passwordType, setPasswordType] = useState<Password>(type);
@@ -32,6 +32,7 @@ export default function PasswordInput(
     return (
         <div className="relative">
             <TextInput
+                ref={ref}
                 {...props}
                 type={passwordType}
                 className={`${className} pr-12`}
