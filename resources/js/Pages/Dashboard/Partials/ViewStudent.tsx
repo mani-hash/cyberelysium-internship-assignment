@@ -96,7 +96,7 @@ function TableHeading(
         <thead className={className}>
             <tr>
                 {headings.map(heading => (
-                    <th className={heading_styles}>
+                    <th key={heading} className={heading_styles}>
                         {heading}
                     </th>
                 ))}
