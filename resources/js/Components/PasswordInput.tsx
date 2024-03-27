@@ -1,49 +1,52 @@
-import { ForwardedRef, InputHTMLAttributes, MouseEventHandler, RefObject, useState } from "react";
+import { ForwardedRef, InputHTMLAttributes, MouseEventHandler, RefObject, forwardRef, useState } from "react";
 import TextInput from "./TextInput";
 
 // define type named Password
 type Password = "password" | "text";
 
-export default function PasswordInput(
-    {type = 'password', className = '', isFocused=false, onChange, ref, ...props} :
-    InputHTMLAttributes<HTMLInputElement> & { type : Password, isFocused? : boolean, ref?: RefObject<HTMLInputElement>}
-) {
-
-    const [passwordType, setPasswordType] = useState<Password>(type);
-
-    // declare visibility of svg icons
-    let visibility: boolean = false;
-
-    if (passwordType !== "password") {
-        visibility = true;
-    }
-
-    // handle onclick event of password visibility button
-    function handlePasswordView(): void {
-        let type: Password = "password";
-
-        if (passwordType === 'password') {
-            type = "text";
+export default forwardRef(
+    function PasswordInput(
+        {type = 'password', className = '', isFocused=false, onChange, ...props} :
+        InputHTMLAttributes<HTMLInputElement> & { type : Password, isFocused? : boolean}, ref
+    ) {
+    
+        const [passwordType, setPasswordType] = useState<Password>(type);
+    
+        // declare visibility of svg icons
+        let visibility: boolean = false;
+    
+        if (passwordType !== "password") {
+            visibility = true;
         }
-
-        setPasswordType(type);
-    }
-
-    return (
-        <div className="relative">
-            <TextInput
-                ref={ref}
-                {...props}
-                type={passwordType}
-                className={`${className} pr-12`}
-                onChange={onChange}
-            />
-            <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
-                <PasswordViewButton onClick={handlePasswordView} visibility={visibility} />
+    
+        // handle onclick event of password visibility button
+        function handlePasswordView(): void {
+            let type: Password = "password";
+    
+            if (passwordType === 'password') {
+                type = "text";
+            }
+    
+            setPasswordType(type);
+        }
+    
+        return (
+            <div className="relative">
+                <TextInput
+                    ref={ref}
+                    {...props}
+                    type={passwordType}
+                    className={`${className} pr-12`}
+                    onChange={onChange}
+                />
+                <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
+                    <PasswordViewButton onClick={handlePasswordView} visibility={visibility} />
+                </div>
             </div>
-        </div>
-    );
-}
+        );
+    }
+    
+);
 
 function PasswordViewButton({ onClick, visibility } : { onClick : MouseEventHandler<HTMLButtonElement>, visibility: boolean}) {
     // Svg to be displayed when password is visible
