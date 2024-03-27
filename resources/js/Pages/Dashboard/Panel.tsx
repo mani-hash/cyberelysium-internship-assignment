@@ -9,6 +9,8 @@ export default function Panel({ className = ''} : {className? : string}) {
                 <AddStudent />
             </div>
 
+            <hr className="m-5 " />
+
             <div className="px-1 py-4 sm:px-4 space-y-2">
                 <ViewStudent />
 
