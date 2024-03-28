@@ -38,7 +38,7 @@ export default function DashboardLayout({ children }: {children: ReactNode}) {
                 <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
                     <div className="border bg-white border-slate-300 rounded-full mb-10 w-fit mx-auto">
                         <DashboardNavBar 
-                            className="flex flex-row justify-center gap-2"
+                            className="flex flex-row justify-center gap-1 sm:gap-2"
                             dashboard_links={dashboard_links}
                         />
 
@@ -63,7 +63,7 @@ function DashboardNavBar({ className, dashboard_links } : { className: string, d
                     key={link.name}
                     href={route(link.route_name)}
                     className={
-                        `px-4 py-3 font-bold text-md rounded-full 
+                        `px-1 sm:px-4 py-3 w-[110px] sm:w-[150px] text-center font-bold max-sm:text-sm whitespace-nowrap rounded-full 
                         ${(route().current() === link.route_name ? 
                             'bg-black hover:bg-slate-700 text-white' 
                                 : 
