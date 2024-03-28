@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -20,7 +21,7 @@ use Inertia\Inertia;
 Route::redirect('/', 'dashboard');
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    return Inertia::render('Dashboard/OverView');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -30,3 +31,10 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::middleware(['auth', 'verified'])->name("dashboard.")->prefix("dashboard")->group(function() {
+    
+    Route::resource('students', StudentController::class)->only("index", "create", "store", "destroy");
+
+    Route::post("/students/{student}", [StudentController::class, "update"])->name('students.update');
+});
