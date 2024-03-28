@@ -8,6 +8,7 @@ import DashboardLayout from "./Layout/DashboardLayout";
 import { Table, TableBody, TableHeading, TableRow } from "@/Components/Table";
 import PaginatorLinks from "@/Components/PaginatorLinks";
 import ViewStudent from "./Partials/ViewStudent";
+import DeleteStudent from "./Partials/DeleteStudent";
 
 interface StudentPaginator {
     current_page: number,
@@ -73,13 +74,13 @@ export default function ViewStudents({ studentPagination }: { studentPagination:
     type ModalStatusTypes = {
         viewModal: { status: boolean, data : string|null},
         editModal: boolean,
-        deleteModal: boolean,
+        deleteModal: { status: boolean, data: number|null},
     }
 
     const ModalStatus : ModalStatusTypes = {
         viewModal : { status: false, data: null},
         editModal : false,
-        deleteModal : false,
+        deleteModal : { status: false, data: null},
     }
 
     const [showModal, setShowModal] = useState<ModalStatusTypes>(ModalStatus)
@@ -104,6 +105,7 @@ export default function ViewStudents({ studentPagination }: { studentPagination:
                                     age={student.age}
                                     status={student.status}
                                     onView={() => setShowModal({...showModal, viewModal : { status: true, data: student.image }})}
+                                    onDelete={() => setShowModal({...showModal, deleteModal : { status: true, data: student.id}})}
                                 />
                             ))}
                             
@@ -114,6 +116,12 @@ export default function ViewStudents({ studentPagination }: { studentPagination:
                         show={showModal.viewModal.status} 
                         image={showModal.viewModal.data} 
                         onClose={() => setShowModal({...showModal, viewModal : { ...showModal.viewModal, status: false}})}
+                    />
+
+                    <DeleteStudent
+                        show={showModal.deleteModal.status}
+                        id={showModal.deleteModal.data}
+                        onClose={() => setShowModal({...showModal, deleteModal : { status: false, data: null}})}
                     />
 
                 </div>
@@ -134,8 +142,8 @@ export default function ViewStudents({ studentPagination }: { studentPagination:
 
 // Student row component for displaying student row data
 function StudentRow(
-    { className, id, name, age, image, status, onView} :
-    {className? : string, id: Number, name: string, age: Number, image?: string, status: boolean, onView: CallableFunction} 
+    { className, id, name, age, image, status, onView, onDelete} :
+    {className? : string, id: Number, name: string, age: Number, image?: string, status: boolean, onView: CallableFunction, onDelete: CallableFunction} 
 ): ReactNode {
 
     return (
@@ -162,6 +170,7 @@ function StudentRow(
             <td className={className}>
                 <DangerButton
                     type="button"
+                    onClick={e => onDelete()}
                 >
                     {delete_svg}
                     Delete
