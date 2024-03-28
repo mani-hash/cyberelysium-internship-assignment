@@ -1,6 +1,5 @@
 import DangerButton from "@/Components/DangerButton";
 import PrimaryButton from "@/Components/PrimaryButton";
-import SecondaryButton from "@/Components/SecondaryButton";
 import Status from "@/Components/Status";
 import { Student } from "@/types";
 import { ReactNode, useState } from "react";
@@ -10,6 +9,7 @@ import PaginatorLinks from "@/Components/PaginatorLinks";
 import ViewStudent from "./Partials/ViewStudent";
 import DeleteStudent from "./Partials/DeleteStudent";
 import EditStudent from "./Partials/EditStudent";
+import EditButton from "@/Components/EditButton";
 
 interface StudentPaginator {
     current_page: number,
@@ -168,14 +168,13 @@ function StudentRow(
                 <Status status={status} className="px-4 py-2 rounded-full text-white" />
             </td>
             <td className={className}>
-                <SecondaryButton
+                <EditButton
                     type="button"
-                    className="bg-blue-700 text-white font-extrabold hover:bg-blue-500"
                     onClick={e => onEdit()}
                 >
                     {edit_svg}
                     Edit
-                </SecondaryButton>
+                </EditButton>
             </td>
             <td className={className}>
                 <DangerButton
