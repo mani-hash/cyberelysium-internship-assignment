@@ -35,6 +35,7 @@ Follow the below steps to setup the project
     composer install
     npm install
     php artisan storage:link
+    php artisan key:generate
     ```
 1. Run either of the commands to run migration
     
