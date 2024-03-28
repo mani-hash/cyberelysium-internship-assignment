@@ -97,6 +97,11 @@ class StudentController extends Controller
      */
     public function destroy(Student $student): RedirectResponse
     {
+        // Delete image if it exists
+        if ($student->image !== null) {
+            Storage::delete($student->image);
+        }
+
         $student->delete();
 
         return redirect()->route('dashboard.students.index');
