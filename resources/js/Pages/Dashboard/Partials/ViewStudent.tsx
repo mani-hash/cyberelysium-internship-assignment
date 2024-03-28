@@ -10,7 +10,7 @@ export default function ViewStudent(
     }
     
     return (
-        <Modal show={show} onClose={onClose}>
+        <Modal maxWidth="md" show={show} onClose={onClose}>
             <div className="px-5 py-3 mx-auto">
                 <h5 className="text-center font-extrabold text-xl underline underline-offset-2">Student Image</h5>
                 <div className="p-3 flex flex-row justify-center">
