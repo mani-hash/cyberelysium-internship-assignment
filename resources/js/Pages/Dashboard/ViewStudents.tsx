@@ -25,9 +25,7 @@ interface StudentPaginator {
 const edit_svg: ReactNode = (
     <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="pr-2"
-        width="20"
-        height="20"
+        className="pr-2 w-5 h-5"
         viewBox="0 0 256 256"
     >
         <path
@@ -47,9 +45,7 @@ const edit_svg: ReactNode = (
 const delete_svg: ReactNode = (
     <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="pr-2"
-        width="20"
-        height="20"
+        className="pr-2 w-5 h-5"
         viewBox="0 0 256 256"
     >
         <path
@@ -80,13 +76,13 @@ export default function ViewStudent({ studentPagination }: { studentPagination: 
                     <h3 className="text-2xl font-extrabold text-center">View, Edit and Delete Students</h3>
                 </div>
                 <div className="overflow-x-auto px-2">
-                    <Table className="table-fixed w-full min-w-[700px] border border-slate-300 rounded-xl text-center border-spacing-5">
+                    <Table className="table-fixed w-full min-w-[900px] border border-slate-300 rounded-xl text-center border-spacing-5">
                         <TableHeading headings={headings} heading_styles="py-3 px-4 uppercase font-semibold text-sm" className="bg-gray-700 text-gray-100" />
 
                         <TableBody>
                             {studentPagination?.data.map(student => (
                                 <StudentRow
-                                    className="py-3 px-4 text-lg"
+                                    className="py-3 px-4 text-sm"
                                     key={student.id}
                                     id={student.id}
                                     name={student.name}
