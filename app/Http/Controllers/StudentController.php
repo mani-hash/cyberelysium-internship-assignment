@@ -19,10 +19,10 @@ class StudentController extends Controller
      */
     public function index(): Response
     {
-        $students = Student::select("id", "name", "age", "status", "image")->get();
+        $studentPagination = Student::select("id", "name", "age", "status", "image")->simplePaginate(10);
 
         return Inertia::render('Dashboard/ViewStudents', [
-            'students' => $students,
+            'studentPagination' => $studentPagination,
         ]);
     }
 
