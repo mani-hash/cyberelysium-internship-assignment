@@ -3,9 +3,23 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import SecondaryButton from "@/Components/SecondaryButton";
 import Status from "@/Components/Status";
 import { Student } from "@/types";
-import { ReactNode, useContext } from "react";
+import { ReactNode } from "react";
 import DashboardLayout from "./Layout/DashboardLayout";
 import { Table, TableBody, TableHeading, TableRow } from "@/Components/Table";
+import PaginatorLinks from "@/Components/PaginatorLinks";
+
+interface StudentPaginator {
+    current_page: number,
+    data: Array<Student>,
+    first_page_url: string|null,
+    from: number,
+    next_page_url: string|null,
+    path: string,
+    per_page: number,
+    prev_page_url: string|null,
+    to: number,
+
+}
 
 // Edit icon svg
 const edit_svg: ReactNode = (
@@ -52,8 +66,8 @@ const delete_svg: ReactNode = (
 );
 
 // Main View Student component
-export default function ViewStudent({ students }: { students: Array<Student>}) {
-
+export default function ViewStudent({ studentPagination }: { studentPagination: StudentPaginator}) {
+    
     // List of headings
     const headings: Array<string> = [
         "ID", "Name", "Age", "Image", "Status", "Edit", "Delete"
@@ -70,7 +84,7 @@ export default function ViewStudent({ students }: { students: Array<Student>}) {
                         <TableHeading headings={headings} heading_styles="py-3 px-4 uppercase font-semibold text-sm" className="bg-gray-700 text-gray-100" />
 
                         <TableBody>
-                            {students?.map(student => (
+                            {studentPagination?.data.map(student => (
                                 <StudentRow
                                     className="py-3 px-4 text-lg"
                                     key={student.id}
@@ -83,6 +97,15 @@ export default function ViewStudent({ students }: { students: Array<Student>}) {
                             
                         </TableBody>
                     </Table>
+                </div>
+
+                <div key={studentPagination.current_page} className="flex flex-row justify-evenly p-8">
+                    <PaginatorLinks 
+                        className="border border-gray-400 rounded-md px-5 py-3 hover:bg-gray-300 disabled:hover:bg-white disabled:cursor-not-allowed disabled:text-gray-600" 
+                        prev_page={studentPagination.prev_page_url} 
+                        next_page={studentPagination.next_page_url}
+                    />
+
                 </div>
 
             </div>
