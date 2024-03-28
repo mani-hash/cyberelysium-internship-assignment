@@ -35,4 +35,6 @@ require __DIR__.'/auth.php';
 Route::middleware(['auth', 'verified'])->name("dashboard.")->prefix("dashboard")->group(function() {
     
     Route::resource('students', StudentController::class)->only("index", "create", "store", "destroy");
+
+    Route::post("/students/{student}", [StudentController::class, "update"])->name('students.update');
 });
