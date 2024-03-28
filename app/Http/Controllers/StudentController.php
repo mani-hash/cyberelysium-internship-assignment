@@ -79,9 +79,11 @@ class StudentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Student $student)
+    public function destroy(Student $student): RedirectResponse
     {
-        //
+        $student->delete();
+
+        return redirect()->route('dashboard.students.index');
     }
 
     // Store the image
