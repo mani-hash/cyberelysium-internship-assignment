@@ -71,9 +71,25 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Student $student)
+    public function update(StudentRequest $request, Student $student): RedirectResponse
     {
-        //
+        // Store the image
+        $path = $this->storeImage($request->file("image"));
+
+        // Delete previous image only if user chooses new image
+        if ($request->old_image_path !== null && $request->file("image") !== null) {
+            Storage::delete($request->old_image_path);
+        }
+
+        // Update user data
+        $student->update([
+            "name" => $request->input("name"),
+            "age" => $request->input("age"),
+            "status" => $request->input("status"),
+            "image" => $path ?? $request->old_image_path,
+        ]);
+
+        return redirect()->route("dashboard.students.index");
     }
 
     /**
