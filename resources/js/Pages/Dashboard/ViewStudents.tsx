@@ -3,10 +3,11 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import SecondaryButton from "@/Components/SecondaryButton";
 import Status from "@/Components/Status";
 import { Student } from "@/types";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import DashboardLayout from "./Layout/DashboardLayout";
 import { Table, TableBody, TableHeading, TableRow } from "@/Components/Table";
 import PaginatorLinks from "@/Components/PaginatorLinks";
+import ViewStudent from "./Partials/ViewStudent";
 
 interface StudentPaginator {
     current_page: number,
@@ -62,12 +63,26 @@ const delete_svg: ReactNode = (
 );
 
 // Main View Student component
-export default function ViewStudent({ studentPagination }: { studentPagination: StudentPaginator}) {
+export default function ViewStudents({ studentPagination }: { studentPagination: StudentPaginator}) {
     
     // List of headings
     const headings: Array<string> = [
         "ID", "Name", "Age", "Image", "Status", "Edit", "Delete"
     ];
+
+    type ModalStatusTypes = {
+        viewModal: { status: boolean, data : string|null},
+        editModal: boolean,
+        deleteModal: boolean,
+    }
+
+    const ModalStatus : ModalStatusTypes = {
+        viewModal : { status: false, data: null},
+        editModal : false,
+        deleteModal : false,
+    }
+
+    const [showModal, setShowModal] = useState<ModalStatusTypes>(ModalStatus)
 
     return (
         <DashboardLayout>
@@ -88,11 +103,19 @@ export default function ViewStudent({ studentPagination }: { studentPagination: 
                                     name={student.name}
                                     age={student.age}
                                     status={student.status}
+                                    onView={() => setShowModal({...showModal, viewModal : { status: true, data: student.image }})}
                                 />
                             ))}
                             
                         </TableBody>
                     </Table>
+
+                    <ViewStudent 
+                        show={showModal.viewModal.status} 
+                        image={showModal.viewModal.data} 
+                        onClose={() => setShowModal({...showModal, viewModal : { ...showModal.viewModal, status: false}})}
+                    />
+
                 </div>
 
                 <div key={studentPagination.current_page} className="flex flex-row justify-evenly p-8">
@@ -111,8 +134,8 @@ export default function ViewStudent({ studentPagination }: { studentPagination: 
 
 // Student row component for displaying student row data
 function StudentRow(
-    { className, id, name, age, image, status} :
-    {className? : string, id: Number, name: string, age: Number, image?: string, status: boolean} 
+    { className, id, name, age, image, status, onView} :
+    {className? : string, id: Number, name: string, age: Number, image?: string, status: boolean, onView: CallableFunction} 
 ): ReactNode {
 
     return (
@@ -121,7 +144,7 @@ function StudentRow(
             <td className={className}>{name}</td>
             <td className={className}>{age.toString()}</td>
             <td className={className}>
-                <PrimaryButton>
+                <PrimaryButton type="button" onClick={e => onView()}>
                     View
                 </PrimaryButton>
             </td>
