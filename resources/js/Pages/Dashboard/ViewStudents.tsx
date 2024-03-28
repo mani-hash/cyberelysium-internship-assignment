@@ -9,6 +9,7 @@ import { Table, TableBody, TableHeading, TableRow } from "@/Components/Table";
 import PaginatorLinks from "@/Components/PaginatorLinks";
 import ViewStudent from "./Partials/ViewStudent";
 import DeleteStudent from "./Partials/DeleteStudent";
+import EditStudent from "./Partials/EditStudent";
 
 interface StudentPaginator {
     current_page: number,
@@ -73,13 +74,13 @@ export default function ViewStudents({ studentPagination }: { studentPagination:
 
     type ModalStatusTypes = {
         viewModal: { status: boolean, data : string|null},
-        editModal: boolean,
+        editModal: { status: boolean, data: Student|null },
         deleteModal: { status: boolean, data: number|null},
     }
 
     const ModalStatus : ModalStatusTypes = {
         viewModal : { status: false, data: null},
-        editModal : false,
+        editModal : { status: false, data: null},
         deleteModal : { status: false, data: null},
     }
 
@@ -105,6 +106,7 @@ export default function ViewStudents({ studentPagination }: { studentPagination:
                                     age={student.age}
                                     status={student.status}
                                     onView={() => setShowModal({...showModal, viewModal : { status: true, data: student.image }})}
+                                    onEdit={() => setShowModal({...showModal, editModal : { status: true, data: student }})}
                                     onDelete={() => setShowModal({...showModal, deleteModal : { status: true, data: student.id}})}
                                 />
                             ))}
@@ -116,6 +118,12 @@ export default function ViewStudents({ studentPagination }: { studentPagination:
                         show={showModal.viewModal.status} 
                         image={showModal.viewModal.data} 
                         onClose={() => setShowModal({...showModal, viewModal : { ...showModal.viewModal, status: false}})}
+                    />
+
+                    <EditStudent
+                        show={showModal.editModal.status}
+                        studentData={showModal.editModal.data}
+                        onClose={() => setShowModal({...showModal, editModal : { status: false, data: null}})}
                     />
 
                     <DeleteStudent
@@ -142,8 +150,8 @@ export default function ViewStudents({ studentPagination }: { studentPagination:
 
 // Student row component for displaying student row data
 function StudentRow(
-    { className, id, name, age, image, status, onView, onDelete} :
-    {className? : string, id: Number, name: string, age: Number, image?: string, status: boolean, onView: CallableFunction, onDelete: CallableFunction} 
+    { className, id, name, age, image, status, onView, onEdit, onDelete} :
+    {className? : string, id: Number, name: string, age: Number, image?: string, status: boolean, onView: CallableFunction, onEdit: CallableFunction, onDelete: CallableFunction} 
 ): ReactNode {
 
     return (
@@ -162,7 +170,9 @@ function StudentRow(
             <td className={className}>
                 <SecondaryButton
                     type="button"
-                    className="bg-blue-700 text-white font-extrabold hover:bg-blue-500">
+                    className="bg-blue-700 text-white font-extrabold hover:bg-blue-500"
+                    onClick={e => onEdit()}
+                >
                     {edit_svg}
                     Edit
                 </SecondaryButton>
