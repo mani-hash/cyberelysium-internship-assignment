@@ -57,6 +57,21 @@ export default function AddStudent() {
 
                 </div>
 
+                {/* Success Msg */}
+                <div className="text-center mb-10">
+                    <Transition
+                        show={recentlySuccessful}
+                        enter="transition ease-in-out"
+                        enterFrom="opacity-0"
+                        leave="transition ease-in-out"
+                        leaveTo="opacity-0"
+                    >
+                        <p className="py-3 px-4 text-md text-green-800 bg-lime-200 border border-green-600 rounded-lg">
+                            Student created!
+                        </p>
+                    </Transition>
+                </div>
+
                 {/* Add Student form */}
                 <form className="space-y-4" onSubmit={addStudent}>
 
@@ -136,21 +151,6 @@ export default function AddStudent() {
                         <DangerButton type="button" onClick={(e) => handleReset()} className="text-xl py-4 px-6">
                             Clear
                         </DangerButton>
-                    </div>
-
-                    {/* Success Msg */}
-                    <div className="text-center">
-                        <Transition
-                            show={recentlySuccessful}
-                            enter="transition ease-in-out"
-                            enterFrom="opacity-0"
-                            leave="transition ease-in-out"
-                            leaveTo="opacity-0"
-                        >
-                            <p className="py-3 px-4 text-md text-green-800 bg-lime-200 border border-green-600 rounded-lg">
-                                Student created!
-                            </p>
-                        </Transition>
                     </div>
                 </form>
 
