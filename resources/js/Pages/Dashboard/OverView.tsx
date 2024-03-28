@@ -3,7 +3,7 @@ import DashboardLayout from "./Layout/DashboardLayout";
 export default function OverView() {
     return (
         <DashboardLayout>
-            <div className="max-w-2xl mx-auto mb-5">
+            <div className="max-w-2xl mx-auto mb-10">
                 <div className="w-full my-10">
                     <h3 className="font-extrabold text-2xl text-center">Overview</h3>
 

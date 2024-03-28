@@ -61,27 +61,30 @@ export default function ViewStudent({ students }: { students: Array<Student>}) {
 
     return (
         <DashboardLayout>
-            <div className="w-full my-10">
-                <h3 className="text-2xl font-extrabold text-center">View, Edit and Delete Students</h3>
-            </div>
-            <div className="overflow-x-auto px-2">
-                <Table className="w-full min-w-[700px] border border-slate-300 rounded-xl text-center border-spacing-5">
-                    <TableHeading headings={headings} heading_styles="py-3 px-4 uppercase font-semibold text-sm" className="bg-gray-700 text-gray-100" />
+            <div className="mb-10">
+                <div className="w-full my-10">
+                    <h3 className="text-2xl font-extrabold text-center">View, Edit and Delete Students</h3>
+                </div>
+                <div className="overflow-x-auto px-2">
+                    <Table className="w-full min-w-[700px] border border-slate-300 rounded-xl text-center border-spacing-5">
+                        <TableHeading headings={headings} heading_styles="py-3 px-4 uppercase font-semibold text-sm" className="bg-gray-700 text-gray-100" />
 
-                    <TableBody>
-                        {students?.map(student => (
-                            <StudentRow
-                                className="py-3 px-4 text-lg"
-                                key={student.id}
-                                id={student.id}
-                                name={student.name}
-                                age={student.age}
-                                status={student.status}
-                            />
-                        ))}
-                        
-                    </TableBody>
-                </Table>
+                        <TableBody>
+                            {students?.map(student => (
+                                <StudentRow
+                                    className="py-3 px-4 text-lg"
+                                    key={student.id}
+                                    id={student.id}
+                                    name={student.name}
+                                    age={student.age}
+                                    status={student.status}
+                                />
+                            ))}
+                            
+                        </TableBody>
+                    </Table>
+                </div>
+
             </div>
         </DashboardLayout>
     );

@@ -51,7 +51,7 @@ export default function AddStudent() {
 
     return (
         <DashboardLayout>
-            <div className="max-w-2xl mx-auto">
+            <div className="max-w-2xl mx-auto mb-10">
                 <div className="w-full my-10">
                     <h3 className="font-extrabold text-2xl text-center">Add Student</h3>
 
