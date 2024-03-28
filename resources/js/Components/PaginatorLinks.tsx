@@ -9,10 +9,6 @@ export default function PaginatorLinks(
         next: <button type="button" className={className} disabled>Next</button>,
     }
 
-    console.log(prev_page);
-    console.log(next_page);
-
-
     if (prev_page !== null) {
         link_states.prev = <Link className={className} href={prev_page}>Prev</Link>;
     }
