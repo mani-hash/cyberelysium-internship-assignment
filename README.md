@@ -71,13 +71,6 @@ Technologies used:
 
 This project is for the CyberElysium internship assignment which was given on the start of 26th of March till the end of 28th of March (3 days).
 
-## About author
-
-Author's name is Manimehalan Thiyagarajan.
-
-- Linkedin: [LinkedIn Profile](https://www.linkedin.com/in/manimehalan/)
-- Github: [Github Profile](https://github.com/mani-hash)
-
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
