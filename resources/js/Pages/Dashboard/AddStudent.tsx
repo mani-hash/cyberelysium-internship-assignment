@@ -1,15 +1,6 @@
 import DashboardLayout from "./Layout/DashboardLayout";
 import StudentForm from "./Form/StudentForm";
 
-interface FormData { 
-    name : string,
-    age: string,
-    status: string,
-    image: File | undefined,
-
-}
-// const FormContext = createContext(null);
-
 export default function AddStudent() {
 
     return (
