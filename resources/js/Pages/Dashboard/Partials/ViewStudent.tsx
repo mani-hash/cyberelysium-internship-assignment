@@ -22,7 +22,6 @@ export default function ViewStudent(
 
                 </div>
             </div>
-            {/* {image === null ? 'error' : image} */}
         </Modal>
     );
 }

@@ -47,7 +47,6 @@ export default function DashboardLayout({ children }: {children: ReactNode}) {
                         <div className="px-4 py-4 space-y-2">
                             {children}
                         </div>
-                        {/* <div className="p-6 text-gray-900">You're logged in!</div> */}
                     </div>
                 </div>
             </div>
