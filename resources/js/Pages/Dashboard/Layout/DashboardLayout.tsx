@@ -9,7 +9,7 @@ interface DashboardLink {
 }
 
 export default function DashboardLayout({ children }: {children: ReactNode}) {
-    // {console.log(students)}
+
     const dashboard_links : Array<DashboardLink> = [
         {
             name: 'Overview',
